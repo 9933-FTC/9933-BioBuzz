@@ -2,6 +2,8 @@ package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.Utility;
 
+import org.firstinspires.ftc.teamcode.subsystems.JBShooterSubsystem;
+
 @Utility
 public class SystemTest extends TurtleOpMode {
 
@@ -42,8 +44,26 @@ public class SystemTest extends TurtleOpMode {
         } else {
             drive.setRearRightSpeed(0);
         }
+        telemetry.addLine("Left bumper = Intake");
+          if (gamepad1.left_bumper) {
+          Intake.startIntake();
+          }else{
+          Intake.stopIntake();
+         }
 
+        telemetry.addLine("Right bumper = Shooter");
+        if (gamepad1.right_bumper) {
+            Shooter.startShooter(0.45);
+        }else{
+            Shooter.stopShooter();
+        }
 
+        telemetry.addLine("Dpad_up = Feeder");
+        if (gamepad1.dpad_up) {
+            Delivery.startDelivery();
+        }else{
+            Delivery.stopDelivery();
+        }
 
     }
 

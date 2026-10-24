@@ -14,10 +14,10 @@ public class DriveSubsystem {
     Telemetry telemetry;
     DcMotorEx frontLeft, frontRight, rearLeft, rearRight;
     IMU gyro ;
-    boolean isRobotAtTarget = true;
+    boolean isRobotAtTarget = false;
     double autoMoveKP = 0.1,    autoTurnKP = 0.1;
     double autoMoveTolerance = 1, autoTurnTolerance = 1;
-    double forwardOffset = 0, rightOffset = 0, turnOffset = 0;
+    double forwardOffset = 0, rightOffset = 0;
     double forwardPodOffset = 5, rightPodOffset = 2;
 
     /**
@@ -46,9 +46,9 @@ public class DriveSubsystem {
         gyro = hardwareMap.get(IMU.class, "imu");
         // This needs to be changed to match the orientation on your robot
         RevHubOrientationOnRobot.LogoFacingDirection logoDirection =
-                RevHubOrientationOnRobot.LogoFacingDirection.UP;
+                RevHubOrientationOnRobot.LogoFacingDirection.LEFT;
         RevHubOrientationOnRobot.UsbFacingDirection usbDirection =
-                RevHubOrientationOnRobot.UsbFacingDirection.FORWARD;
+                RevHubOrientationOnRobot.UsbFacingDirection.BACKWARD;
 
         RevHubOrientationOnRobot orientationOnRobot = new
                 RevHubOrientationOnRobot(logoDirection, usbDirection);
@@ -97,17 +97,17 @@ public class DriveSubsystem {
 
         //Rotational Math
         //Calculate Error
+        double targetAngle = endAngle, currentAngle = gyro.getRobotYawPitchRollAngles().getYaw(AngleUnit.DEGREES);
+        if (Math.abs(targetAngle - currentAngle) > 180) {
+            double delta = (180 - Math.abs(targetAngle));
 
-        double turnError, currentAngle;
-
-        //TODO Training Wheels Protocol (Spider-Man Reference!!!)
-        if (true) {
-            currentAngle = AngleUnit.normalizeDegrees(gyro.getRobotYawPitchRollAngles().getYaw(AngleUnit.DEGREES) + turnOffset);
-        } else {
-            currentAngle = gyro.getRobotYawPitchRollAngles().getYaw(AngleUnit.DEGREES);
+            if (currentAngle >= 0) {
+                targetAngle = 180 + delta;
+            } else {
+                targetAngle = -180 - delta;
+            }
         }
-
-        turnError = AngleUnit.normalizeDegrees(endAngle - currentAngle);
+        double turnError = targetAngle - currentAngle;
 
         //Calculate Power
         double turnPower = turnError * autoTurnKP;
@@ -119,10 +119,9 @@ public class DriveSubsystem {
         if (totalDistanceError < autoMoveTolerance && turnError < autoTurnTolerance){
             isRobotAtTarget = true;
         } else if (isRobotAtTarget) {
-            //TODO Training Wheels Protocol (Spider-Man Reference!!!)
+            //Training Wheels Protocol (Spider-Man Reference!!!)
             forwardOffset = getForwardPose() + forwardOffset;
             rightOffset = getRightPose() + rightOffset;
-            turnOffset = -gyro.getRobotYawPitchRollAngles().getYaw(AngleUnit.DEGREES);
             isRobotAtTarget = false;
             return;
         }
