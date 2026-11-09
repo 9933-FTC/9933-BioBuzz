@@ -14,7 +14,7 @@ public class JBDeliverySubsystem {
     }
 
     public void startDelivery () {
-        DeliveryServo.setPower(-1);
+        DeliveryServo.setPower(-0.4);
     }
     public void reverseDelivery () {
         DeliveryServo.setPower(1);

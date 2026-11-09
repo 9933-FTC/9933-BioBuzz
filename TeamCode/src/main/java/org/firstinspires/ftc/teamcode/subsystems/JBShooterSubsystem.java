@@ -1,16 +1,17 @@
 package org.firstinspires.ftc.teamcode.subsystems;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
 public class JBShooterSubsystem {
-    DcMotor Shooter;
+    DcMotorEx Shooter;
 
 
 
     public JBShooterSubsystem(HardwareMap hardwareMap){
-        Shooter=hardwareMap.get(DcMotor.class,"Shooter");
+        Shooter=hardwareMap.get(DcMotorEx.class,"Shooter");
         Shooter.setDirection(DcMotorSimple.Direction.REVERSE);
 
     }
@@ -24,6 +25,11 @@ public class JBShooterSubsystem {
 
 
     }
+
+    public void setShooterVelocity(double speed) {
+        Shooter.setVelocity(speed);
+    }
+
 
 
 }

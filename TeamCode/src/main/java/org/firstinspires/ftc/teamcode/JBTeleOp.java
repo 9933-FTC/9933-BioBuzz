@@ -33,12 +33,13 @@ public class JBTeleOp extends TurtleOpMode {
         }
         telemetry.addData("Clean Up", gamepad1.a);
         if (gamepad1.a) {
-            telemetry.addLine("Clean Up");
-            Shooter.startShooter(0.5);
+            //telemetry.addLine("Clean Up");
+           // Shooter.startShooter(0.5);
         } else if (gamepad1.b) {
-            Shooter.startShooter(0.35);
+           // Shooter.startShooter(0.35);
         } else if (gamepad1.right_bumper) {
-            Shooter.startShooter(0.45);
+            //Shooter.startShooter(0.45);
+            Shooter.setShooterVelocity(1230);
         }else{
             Shooter.stopShooter();
         }
