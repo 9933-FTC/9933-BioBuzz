@@ -15,7 +15,10 @@ public void loop(){
     super.loop();
     telemetry.addLine("step:"+step);
 
-    /* Step 0 = Start auto
+    /*
+
+    Step 0 = Start auto
+        0 = Zero Gyro
     Step 100 = Shoot preloads
         100 - Start Shooter
         110 - Wait 1.5 Seconds
