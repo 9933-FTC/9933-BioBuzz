@@ -17,6 +17,10 @@ public void loop(){
 
     /*
 
+    Hundreds Place = Major Step
+    Tens Place = Minor Step
+    Ones Place = Frantic Debug (At Comp Fixes, should be changed before the next event)
+
     Step 0 = Start auto
         0 = Zero Gyro
     Step 100 = Shoot preloads
