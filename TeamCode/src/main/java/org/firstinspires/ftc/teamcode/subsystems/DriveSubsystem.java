@@ -16,9 +16,9 @@ public class DriveSubsystem {
     IMU gyro ;
     boolean isRobotAtTarget = true;
     double autoMoveKP = 0.04, autoStrafeKP = 0.08,   autoTurnKP = 0.01;
-    double autoMoveTolerance = 1, autoTurnTolerance = 1;
+    double autoMoveTolerance = 1.5, autoTurnTolerance = 2;
     double forwardOffset = 0, leftOffset = 0, turnOffset = 0;
-    double forwardPodOffset = 6.25, leftPodOffset = -1;
+    double forwardPodOffset = -6.25, leftPodOffset = 4;
 
     /**
      * Assumes Drive Motors are configured as leftFront, rightFront, leftRear, and rightRear
@@ -75,7 +75,7 @@ public class DriveSubsystem {
 
 
     public double getForwardPose() {
-        double returnDistance = frontLeft.getCurrentPosition();
+        double returnDistance = -rearRight.getCurrentPosition();
         returnDistance /= 505; //TODO: Determine Ticks Per Inch
         returnDistance += gyro.getRobotYawPitchRollAngles().getYaw(AngleUnit.RADIANS) * forwardPodOffset;
         returnDistance -= forwardOffset;

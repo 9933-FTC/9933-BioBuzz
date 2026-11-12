@@ -19,7 +19,7 @@ public class JBTeleOp extends TurtleOpMode {
             drive.zeroGyro();
         }
 
-        if (gamepad1.left_bumper) {
+        if (gamepad2.left_bumper) {
             Intake.startIntake();
         } else {
             Intake.stopIntake();
@@ -32,14 +32,9 @@ public class JBTeleOp extends TurtleOpMode {
             Delivery.stopDelivery();
         }
         telemetry.addData("Clean Up", gamepad1.a);
-        if (gamepad1.a) {
-            //telemetry.addLine("Clean Up");
-           // Shooter.startShooter(0.5);
-        } else if (gamepad1.b) {
-           // Shooter.startShooter(0.35);
-        } else if (gamepad1.right_bumper) {
+         if (gamepad2.right_bumper) {
             //Shooter.startShooter(0.45);
-            Shooter.setShooterVelocity(1230);
+            Shooter.setShooterVelocity(1250);
         }else{
             Shooter.stopShooter();
         }
