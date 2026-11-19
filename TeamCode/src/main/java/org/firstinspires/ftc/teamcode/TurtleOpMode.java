@@ -7,6 +7,7 @@ import org.firstinspires.ftc.teamcode.subsystems.DriveSubsystem;
 import org.firstinspires.ftc.teamcode.subsystems.JBDeliverySubsystem;
 import org.firstinspires.ftc.teamcode.subsystems.JBIntakeSubsystem;
 import org.firstinspires.ftc.teamcode.subsystems.JBShooterSubsystem;
+import org.firstinspires.ftc.teamcode.subsystems.limelight;
 
 
 public class TurtleOpMode extends OpMode {
@@ -15,6 +16,7 @@ public class TurtleOpMode extends OpMode {
     JBIntakeSubsystem Intake;
     JBShooterSubsystem Shooter;
     JBDeliverySubsystem Delivery;
+    limelight greenthinglight;
     ElapsedTime timer = new ElapsedTime();
 
     @Override
@@ -23,11 +25,13 @@ public class TurtleOpMode extends OpMode {
         Intake = new JBIntakeSubsystem(hardwareMap);
         Shooter = new JBShooterSubsystem(hardwareMap);
         Delivery = new JBDeliverySubsystem(hardwareMap);
+        greenthinglight = new limelight(telemetry, hardwareMap);
     }
 
     @Override
     public void loop() {
         drive.populateTelemetry();
+        greenthinglight.populateTelemetry();
     }
 
 }
