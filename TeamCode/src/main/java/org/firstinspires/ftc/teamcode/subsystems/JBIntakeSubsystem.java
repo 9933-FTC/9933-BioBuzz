@@ -14,7 +14,7 @@ public class JBIntakeSubsystem {
 
     }
     public void startIntake (){
-        Intake.setPower(-1);
+        Intake.setPower(-0.8);
 
 
     }
@@ -23,6 +23,11 @@ public class JBIntakeSubsystem {
 
 
     }
+public void lessIntake (){
+        Intake.setPower(-0.5);
 
-
+}
+public void OutTake(){
+        Intake.setPower(0.8);
+    }
 }

@@ -3,7 +3,7 @@ package org.firstinspires.ftc.teamcode;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 
 @Autonomous
-public class LeftRedBlueAuto extends TurtleOpMode {
+public class HiveDownAuto extends TurtleOpMode {
     int step = 0;
 
     @Override
@@ -72,9 +72,25 @@ public class LeftRedBlueAuto extends TurtleOpMode {
             }
 
         } else if (step == 2050) {
-            Shooter.stopShooter();
             Delivery.stopDelivery();
-            step = 3010;
+            Intake.lessIntake();
+            timer.reset();
+            step = 3000;
+
+        } else if (step == 3000) {
+            Intake.stopIntake();
+            Delivery.startDelivery();
+            step = 3001;
+
+        } else if (step == 3001){
+            if (timer.seconds() >= 4) {
+                step = 3005;
+            }
+        } else if (step == 3005){
+                Shooter.stopShooter();
+                Delivery.stopDelivery();
+                timer.reset();
+                step = 3010;
 
         } else if (step == 3010) {
             drive.autoMove(0, 12, 0);

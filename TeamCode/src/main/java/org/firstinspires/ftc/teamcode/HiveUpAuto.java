@@ -3,7 +3,7 @@ package org.firstinspires.ftc.teamcode;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 
 @Autonomous
-public class RightRedBlueAuto extends TurtleOpMode {
+public class HiveUpAuto extends TurtleOpMode {
     int step = 0;
 
 @Override
@@ -11,9 +11,9 @@ public void init(){
     super.init();
 }
 @Override
-public void loop(){
+public void loop() {
     super.loop();
-    telemetry.addLine("step:"+step);
+    telemetry.addLine("step:" + step);
 
     /*
 
@@ -71,9 +71,22 @@ public void loop(){
         }
 
     } else if (step == 2050) {
-        Shooter.stopShooter();
         Delivery.stopDelivery();
-        step = 3010;
+        Intake.lessIntake();
+        step = 3000;
+
+    } else if (step == 3000) {
+        Intake.stopIntake();
+        Delivery.startDelivery();
+        timer.reset();
+        step = 3001;
+
+    } else if (step == 3001) {
+        if (timer.seconds() >= 4) {
+            Delivery.stopDelivery();
+            Shooter.stopShooter();
+            step = 3010;
+        }
 
     } else if (step == 3010) {
         drive.autoMove(-28, 0, 0);
@@ -81,34 +94,40 @@ public void loop(){
             timer.reset();
             step = 3020;
         }
-    } else if (step == 3020) {
-        // This is called a dwell timer, used to make sure systems stop and inputs updated before moving onto the next move
-        if (timer.seconds() >= 0.5) {
-            step = 3030;
-        }
-    } else if (step == 3030) {
-        drive.autoMove(0, 80, 0);
-        if (drive.isRobotAtTarget()) {
-            timer.reset();
-            step = 3040;
-        }
-    } else if (step == 3040) {
-        // This is called a dwell timer, used to make sure systems stop and inputs updated before moving onto the next move
-        if (timer.seconds() >= 0.5) {
-            step = 3050;
-        }
-    } else if (step == 3050) {
-        drive.autoMove(-10, 0, 0);
-        if (drive.isRobotAtTarget()) {
-            timer.reset();
-            step = 3060;
-        }
-    } else if (step == 3060) {
-        // This is called a dwell timer, used to make sure systems stop and inputs updated before moving onto the next move
-        if (timer.seconds() >= 0.5) {
-            step = 4000;
+        } else if (step == 3020) {
+            drive.autoMove(-28, 0, 0);
+            if (drive.isRobotAtTarget()) {
+                timer.reset();
+                step = 3030;
+            }
+        } else if (step == 3030) {
+            // This is called a dwell timer, used to make sure systems stop and inputs updated before moving onto the next move
+            if (timer.seconds() >= 0.5) {
+                step = 3040;
+            }
+        } else if (step == 3040) {
+            drive.autoMove(0, 80, 0);
+            if (drive.isRobotAtTarget()) {
+                timer.reset();
+                step = 3050;
+            }
+        } else if (step == 3050) {
+            // This is called a dwell timer, used to make sure systems stop and inputs updated before moving onto the next move
+            if (timer.seconds() >= 0.5) {
+                step = 3060;
+            }
+        } else if (step == 3060) {
+            drive.autoMove(-10, 0, 0);
+            if (drive.isRobotAtTarget()) {
+                timer.reset();
+                step = 3070;
+            }
+        } else if (step == 3070) {
+            // This is called a dwell timer, used to make sure systems stop and inputs updated before moving onto the next move
+            if (timer.seconds() >= 0.5) {
+                step = 4000;
+            }
         }
     }
 }
 
-}

@@ -28,24 +28,32 @@ public class JBTeleOp extends TurtleOpMode {
 
         if (gamepad2.left_bumper) {
             Intake.startIntake();
+        } else if (gamepad2.left_trigger >= 0.5){
+            Intake.lessIntake();
+        } else if (gamepad2.a) {
+            Intake.OutTake();
         } else {
             Intake.stopIntake();
         }
-        if (gamepad1.dpad_up) {
+        if (gamepad2.dpad_up) {
             Delivery.startDelivery();
-        } else if (gamepad1.dpad_down) {
+        } else if (gamepad2.dpad_down) {
             Delivery.reverseDelivery();
         } else {
             Delivery.stopDelivery();
         }
         telemetry.addData("Clean Up", gamepad1.a);
          if (gamepad2.right_bumper) {
-            //Shooter.startShooter(0.45);
-            Shooter.setShooterVelocity(1250);
-        }else{
-            Shooter.stopShooter();
+            Shooter.setShooterVelocity(1245);
+        }else {
+             Shooter.stopShooter();
+         }
+        if (gamepad1.dpad_right) {
+            Flowery.startFlower();
+        } else if (gamepad1.dpad_left) {
+            Flowery.reverseFLower();
         }
-
     }
 }
+
 
