@@ -2,13 +2,14 @@ package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 
-@Autonomous
-public class HiveDownAuto extends TurtleOpMode {
+@Autonomous(preselectTeleOp = "JBTeleOpRed")
+public class RedHiveDownAuto extends TurtleOpMode {
     int step = 0;
 
     @Override
     public void init() {
         super.init();
+        LemonLight.SetAllianceColor(true);
     }
 
     @Override

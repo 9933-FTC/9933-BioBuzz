@@ -2,18 +2,19 @@ package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 @TeleOp
-public class JBTeleOp extends TurtleOpMode {
+public class JBTeleOpBlue extends TurtleOpMode {
 
     @Override
     public void init() {
         super.init();
+        LemonLight.SetAllianceColor(false);
     }
 
     @Override
     public void loop() {
         super.loop();
         if (gamepad1.right_bumper){
-            drive.fieldCentricDrive(-gamepad1.left_stick_y* 0.3, gamepad1.left_stick_x * 0.3, greenthinglight.txValue()* 0.03);
+            drive.fieldCentricDrive(-gamepad1.left_stick_y* 0.3, gamepad1.left_stick_x * 0.3, LemonLight.txValue()* 0.03);
         }
 
         else {
